@@ -1,0 +1,44 @@
+var oldQuestion = '';
+clearInterval(questionUpdateChecker)
+clearInterval(answerShower)
+var answers = {};
+var hover = ''
+var userAnswer = null;
+var questionUpdateChecker = setInterval(function(){
+    var arr = document.querySelectorAll(':hover');
+    for(var i=0;i<arr.length;i++) {
+        if(arr[i].className == 'sc-jjgyjb bAjgcl') userAnswer =arr[i].lastChild.lastChild.lastChild.lastChild.lastChild.lastChild.innerHTML;
+    }
+    if(document.getElementsByClassName('sc-hJfILt fdfyHC')[0]!=null) {
+        var question = document.getElementsByClassName('sc-hJfILt fdfyHC')[0].firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.innerHTML.toString()
+        if(oldQuestion != question) {
+            console.log('new QUESTION EVENT');
+            oldQuestion = question;
+        }
+    } else {
+        if(document.getElementsByClassName('sc-fuzEkO bCVktY')[0].firstChild.firstChild.innerHTML.includes('+')) {
+            console.log("Question: "+oldQuestion+"  Answer: "+userAnswer)
+            answers[oldQuestion] = userAnswer;
+        }
+        if(document.getElementsByClassName('sc-dRFBHB cdrUj')[0]) {
+            console.log('Got one wrong removing from answers ')
+            answers[oldQuestion] = null;
+        }
+    }
+},100)
+
+
+var answerShower = setInterval(function(){
+    var arr = document.getElementsByClassName('sc-jjgyjb bAjgcl');
+    if(!answers[oldQuestion]) return;
+    for(var i=0;i<arr.length;i++) {
+        var element = arr[i]
+        var option = element.lastChild.lastChild.lastChild.lastChild.lastChild.lastChild.innerHTML;
+        
+        if(option.includes(answers[oldQuestion])) {
+            element.style='position:absolute;width:100%;height:100%;'
+        } else {
+            element.style='position:absolute;width:0%;height:0%;top:-100%'
+        }
+    }
+},100)
