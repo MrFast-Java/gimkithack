@@ -9,13 +9,10 @@
 
 
 
-
 console.log('%cGimkit Answer Tracker\nMade By Brad', 'font-size: 40px; color: purple');
 console.log('%cThe more questions you answer the smarter it gets.\nFor best results use touchscreen only and dont spam it.', 'font-size: 20px; color: red');
 
 var oldQuestion = '';
-clearInterval(questionUpdateChecker)
-clearInterval(answerShower)
 var answers = {};
 var hover = ''
 var userAnswer = null;
@@ -23,7 +20,7 @@ var questionUpdateChecker = setInterval(function(){
     try {
         var arr = document.querySelectorAll(':hover');
         for(var i=0;i<arr.length;i++) {
-            if(arr[i].className == 'sc-jjgyjb bAjgcl') userAnswer =arr[i].lastChild.lastChild.lastChild.lastChild.lastChild.lastChild.innerHTML;
+            if(arr[i].className == 'sc-jjgyjb bAjgcl') userAnswer =arr[i].firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.innerHTML;
         }
         if(document.getElementsByClassName('sc-hJfILt fdfyHC')[0]!=null) {
             var question = document.getElementsByClassName('sc-hJfILt fdfyHC')[0].firstChild.firstChild.firstChild.firstChild.firstChild.firstChild.innerHTML.toString()
@@ -32,24 +29,10 @@ var questionUpdateChecker = setInterval(function(){
                 oldQuestion = question;
             }
         } else {
-            if(document.getElementsByClassName('sc-fuzEkO bCVktY')[0].firstChild.firstChild.innerHTML.includes('+')) {
-                console.log("Question: "+oldQuestion+"  Answer: "+userAnswer)
-                answers[oldQuestion] = userAnswer;
-            }
-            if(document.getElementsByClassName('sc-dRFBHB cdrUj')[0]) {
-                console.log('Got one wrong removing from answers ')
-                answers[oldQuestion] = null;
-            }
+            if(document.getElementsByClassName('sc-fuzEkO bCVktY')[0].firstChild.firstChild.innerHTML.includes('+')) answers[oldQuestion] = userAnswer;
+            if(document.getElementsByClassName('sc-dRFBHB cdrUj')[0]) answers[oldQuestion] = null;
         }
-    } catch (error) {
-        
-    }
-},100)
-
-
-var answerShower = setInterval(function(){
-    try {
-        var arr = document.getElementsByClassName('sc-jjgyjb bAjgcl');
+        arr = document.getElementsByClassName('sc-jjgyjb bAjgcl');
         if(!answers[oldQuestion]) return;
         for(var i=0;i<arr.length;i++) {
             var element = arr[i]
@@ -64,4 +47,4 @@ var answerShower = setInterval(function(){
     } catch (error) {
         
     }
-},100)   
+},100)
