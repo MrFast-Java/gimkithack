@@ -9,9 +9,7 @@
 
 
 
-console.log('%cGimkit Answer Tracker\nMade By Brad', 'font-size: 40px; color: purple');
-console.log('%cThe more questions you answer the smarter it gets.\nFor best results use touchscreen only and dont spam it.', 'font-size: 20px; color: red');
-
+alert("Gimkit Answer Tracker - Made By Brad\nThe more questions you answer the smarter it gets.For best results use touchscreen only and dont spam it.");
 var oldQuestion = '';
 var answers = {};
 var hover = ''
